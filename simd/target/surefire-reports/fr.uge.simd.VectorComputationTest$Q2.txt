@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fr.uge.simd.VectorComputationTest$Q2
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s - in fr.uge.simd.VectorComputationTest$Q2
