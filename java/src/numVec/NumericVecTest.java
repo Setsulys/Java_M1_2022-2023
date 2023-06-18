@@ -532,399 +532,400 @@ public class NumericVecTest {
   }
 
 
-//  @Nested
-//  public class Q6 {
-//
-//    @Test
-//    public void addAll() {
-//      var seq = NumericVec.longs();
-//      seq.add(44L);
-//      seq.add(666L);
-//      var seq2 = NumericVec.longs();
-//      seq2.add(77L);
-//      seq2.add(666L);
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(4, seq.size()),
-//          () -> assertEquals(44L, seq.get(0)),
-//          () -> assertEquals(666L, seq.get(1)),
-//          () -> assertEquals(77L, seq.get(2)),
-//          () -> assertEquals(666L, seq.get(3))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllInts() {
-//      var seq = NumericVec.ints(44, 666);
-//      var seq2 = NumericVec.ints(77, 666);
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(4, seq.size()),
-//          () -> assertEquals(44, seq.get(0)),
-//          () -> assertEquals(666, seq.get(1)),
-//          () -> assertEquals(77, seq.get(2)),
-//          () -> assertEquals(666, seq.get(3))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllLongs() {
-//      var seq = NumericVec.longs(44, 666);
-//      var seq2 = NumericVec.longs(77, 666);
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(4, seq.size()),
-//          () -> assertEquals(44L, seq.get(0)),
-//          () -> assertEquals(666L, seq.get(1)),
-//          () -> assertEquals(77L, seq.get(2)),
-//          () -> assertEquals(666L, seq.get(3))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllDoubles() {
-//      var seq = NumericVec.doubles(44., 666.);
-//      var seq2 = NumericVec.doubles(77., 666.);
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(4, seq.size()),
-//          () -> assertEquals(44., seq.get(0)),
-//          () -> assertEquals(666., seq.get(1)),
-//          () -> assertEquals(77., seq.get(2)),
-//          () -> assertEquals(666., seq.get(3))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllIntsEmpty() {
-//      var seq = NumericVec.ints(32);
-//      var seq2 = NumericVec.ints();
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(1, seq.size()),
-//          () -> assertEquals(32, seq.get(0))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllLongsEmpty() {
-//      var seq = NumericVec.longs(32L);
-//      var seq2 = NumericVec.longs();
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(1, seq.size()),
-//          () -> assertEquals(32L, seq.get(0))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllDoublesEmpty() {
-//      var seq = NumericVec.doubles(32.);
-//      var seq2 = NumericVec.doubles();
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(1, seq.size()),
-//          () -> assertEquals(32., seq.get(0))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllIntsBig() {
-//      var seq = NumericVec.ints();
-//      IntStream.range(0, 1_000_000).forEach(seq::add);
-//      var seq2 = NumericVec.ints();
-//      IntStream.range(1_000_000, 2_000_000).forEach(seq2::add);
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(2_000_000, seq.size()),
-//          () -> IntStream.range(0, 2_000_000).forEach(i -> assertEquals(i, seq.get(i)))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllLongsBig() {
-//      var seq = NumericVec.longs();
-//      LongStream.range(0, 1_000_000).forEach(seq::add);
-//      var seq2 = NumericVec.longs();
-//      LongStream.range(1_000_000, 2_000_000).forEach(seq2::add);
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(2_000_000, seq.size()),
-//          () -> IntStream.range(0, 2_000_000).forEach(i -> assertEquals((long) i, seq.get(i)))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllDoublesBig() {
-//      var seq = NumericVec.doubles();
-//      IntStream.range(0, 1_000_000).mapToDouble(i -> i).forEach(seq::add);
-//      var seq2 = NumericVec.doubles();
-//      IntStream.range(1_000_000, 2_000_000).mapToDouble(i -> i).forEach(seq2::add);
-//      seq.addAll(seq2);
-//      assertAll(
-//          () -> assertEquals(2_000_000, seq.size()),
-//          () -> IntStream.range(0, 2_000_000).forEach(i -> assertEquals((double) i, seq.get(i)))
-//      );
-//    }
-//
-//    @Test
-//    public void addAllPrecondition() {
-//      var seq = NumericVec.longs(65L, 67L);
-//      assertThrows(NullPointerException.class, () -> seq.addAll(null));
-//    }
-//  }
-//
-//
-//  @Nested
-//  public class Q7 {
-//
-//    @Test
-//    public void map() {
-//      var seq = NumericVec.longs();
-//      seq.add(45L);
-//      seq.add(37L);
-//      NumericVec<Double> seq2 = seq.map(l -> (double) l, NumericVec::doubles);
-//      assertAll(
-//          () -> assertEquals(2, seq2.size()),
-//          () -> assertEquals(45., seq2.get(0)),
-//          () -> assertEquals(37., seq2.get(1))
-//      );
-//    }
-//
-//    @Test
-//    public void mapOfInts() {
-//      var seq = NumericVec.ints(45, 37);
-//      NumericVec<Integer> seq2 = seq.map(i -> 2 * i, NumericVec::ints);
-//      assertAll(
-//          () -> assertEquals(2, seq2.size()),
-//          () -> assertEquals(90, seq2.get(0)),
-//          () -> assertEquals(74, seq2.get(1)),
-//          () -> assertNotSame(seq, seq2)
-//      );
-//    }
-//
-//    @Test
-//    public void mapOfLongs() {
-//      var seq = NumericVec.longs(45L, 37L);
-//      NumericVec<Long> seq2 = seq.map(l -> 2L * l, NumericVec::longs);
-//      assertAll(
-//          () -> assertEquals(2, seq2.size()),
-//          () -> assertEquals(90L, seq2.get(0)),
-//          () -> assertEquals(74L, seq2.get(1)),
-//          () -> assertNotSame(seq, seq2)
-//      );
-//    }
-//
-//    @Test
-//    public void mapOfDoubles() {
-//      var seq = NumericVec.doubles(45., 37.);
-//      NumericVec<Double> seq2 = seq.map(d -> 2.0 * d, NumericVec::doubles);
-//      assertAll(
-//          () -> assertEquals(2, seq2.size()),
-//          () -> assertEquals(90., seq2.get(0)),
-//          () -> assertEquals(74., seq2.get(1)),
-//          () -> assertNotSame(seq, seq2)
-//      );
-//    }
-//
-//    @Test
-//    public void mapOfIntsToOtherPrimitives() {
-//      var seq = NumericVec.ints(45, 37);
-//      var seq2 = seq.map(i -> (long) i, NumericVec::longs);
-//      var seq3 = seq.map(i -> (double) i, NumericVec::doubles);
-//      assertAll(
-//          () -> assertEquals(2, seq2.size()),
-//          () -> assertEquals(45L, seq2.get(0)),
-//          () -> assertEquals(37L, seq2.get(1)),
-//          () -> assertEquals(2, seq3.size()),
-//          () -> assertEquals(45., seq3.get(0)),
-//          () -> assertEquals(37., seq3.get(1))
-//      );
-//    }
-//
-//    @Test
-//    public void mapOfLongsToOtherPrimitives() {
-//      var seq = NumericVec.longs(45L, 37L);
-//      var seq2 = seq.map(l -> (int) (long) l, NumericVec::ints);
-//      var seq3 = seq.map(l -> (double) l, NumericVec::doubles);
-//      assertAll(
-//          () -> assertEquals(2, seq2.size()),
-//          () -> assertEquals(45, seq2.get(0)),
-//          () -> assertEquals(37, seq2.get(1)),
-//          () -> assertEquals(2, seq3.size()),
-//          () -> assertEquals(45., seq3.get(0)),
-//          () -> assertEquals(37., seq3.get(1))
-//      );
-//    }
-//
-//    @Test
-//    public void mapOfDoublesToOtherPrimitives() {
-//      var seq = NumericVec.doubles(45., 37.);
-//      var seq2 = seq.map(d -> (int) (double) d, NumericVec::ints);
-//      var seq3 = seq.map(d -> (long) (double) d, NumericVec::longs);
-//      assertAll(
-//          () -> assertEquals(2, seq2.size()),
-//          () -> assertEquals(45, seq2.get(0)),
-//          () -> assertEquals(37, seq2.get(1)),
-//          () -> assertEquals(2, seq3.size()),
-//          () -> assertEquals(45L, seq3.get(0)),
-//          () -> assertEquals(37L, seq3.get(1))
-//      );
-//    }
-//
-//    @Test
-//    public void mapNotTheSame() {
-//      var seq = NumericVec.longs(42L);
-//      var seq2 = seq.map((Object o) -> 42, NumericVec::ints);
-//      assertNotSame(seq, seq2);
-//    }
-//
-//    @Test
-//    public void mapPreconditions() {
-//      var seq = NumericVec.longs();
-//      assertAll(
-//          () -> assertThrows(NullPointerException.class, () -> seq.map(null, NumericVec::ints)),
-//          () -> assertThrows(NullPointerException.class, () -> seq.map(i -> i, null))
-//      );
-//    }
-//  }
-//
-//
-//  @Nested
-//  public class Q8 {
-//
-//    @Test
-//    public void toNumericSeq() {
-//      var seq = IntStream.range(0, 10).boxed().collect(NumericVec.toNumericVec(NumericVec::ints));
-//      assertAll(
-//          () -> assertEquals(10, seq.size()),
-//          () -> IntStream.range(0, 10).forEach(i -> assertEquals(i, seq.get(i)))
-//      );
-//    }
-//
-//    @Test
-//    public void toNumericSeqMutable() {
-//      var seq = Stream.of(12L, 45L).collect(NumericVec.toNumericVec(NumericVec::longs));
-//      seq.add(99L);
-//      assertAll(
-//          () -> assertEquals(3, seq.size()),
-//          () -> assertEquals(12L, seq.get(0)),
-//          () -> assertEquals(45L, seq.get(1)),
-//          () -> assertEquals(99L, seq.get(2))
-//      );
-//    }
-//
-//    @Test
-//    public void toNumericSeqParallelInts() {
-//      var seq = IntStream.range(0, 1_000_000).parallel()
-//          .boxed()
-//          .collect(NumericVec.toNumericVec(NumericVec::ints));
-//      assertAll(
-//          () -> assertEquals(1_000_000, seq.size()),
-//          () -> IntStream.range(0, 1_000_000).forEach(i -> assertEquals(i, seq.get(i)))
-//      );
-//    }
-//
-//    @Test
-//    public void toNumericSeqParallelLongs() {
-//      var seq = LongStream.range(0, 1_000_000).parallel()
-//          .boxed()
-//          .collect(NumericVec.toNumericVec(NumericVec::longs));
-//      assertAll(
-//          () -> assertEquals(1_000_000, seq.size()),
-//          () -> IntStream.range(0, 1_000_000).forEach(i -> assertEquals((long) i, seq.get(i)))
-//      );
-//    }
-//
-//    @Test
-//    public void toNumericSeqParallelDoubles() {
-//      var seq = IntStream.range(0, 1_000_000).parallel()
-//          .mapToObj(i -> (double) i)
-//          .collect(NumericVec.toNumericVec(NumericVec::doubles));
-//      assertAll(
-//          () -> assertEquals(1_000_000, seq.size()),
-//          () -> IntStream.range(0, 1_000_000).forEach(i -> assertEquals((double) i, seq.get(i)))
-//      );
-//    }
-//
-//    @Test
-//    public void toNumericSeqPreconditions() {
-//      assertThrows(NullPointerException.class, () -> NumericVec.toNumericVec(null));
-//    }
-//
-//    @Test
-//    public void toNumericVersusNull() {
-//      assertAll(
-//          () -> assertThrows(NullPointerException.class, () -> Stream.of(12, null).collect(NumericVec.toNumericVec(NumericVec::ints))),
-//          () -> assertThrows(NullPointerException.class, () -> Stream.of(12L, null).collect(NumericVec.toNumericVec(NumericVec::longs))),
-//          () -> assertThrows(NullPointerException.class, () -> Stream.of(12., null).collect(NumericVec.toNumericVec(NumericVec::doubles)))
-//      );
-//    }
-//  }
-//
-//
-//  @Nested
-//  public class Q9 {
-//
-//    @Test
-//    public void stream() {
-//      var seq = NumericVec.longs();
-//      seq.add(12L);
-//      seq.add(1L);
-//      assertEquals(List.of(12L, 1L), seq.stream().toList());
-//    }
-//
-//    @Test
-//    public void streamCount() {
-//      var seq = NumericVec.ints(2, 3, 4);
-//      assertEquals(3, seq.stream().map(__ -> fail()).count());
-//    }
-//
-//    @Test
-//    public void streamParallel() {
-//      var seq = IntStream.range(0, 1_000_000).boxed().collect(NumericVec.toNumericVec(NumericVec::ints));
-//      var thread = Thread.currentThread();
-//      var otherThreadCount = seq.stream().parallel().mapToInt(__ -> thread != Thread.currentThread()? 1: 0).sum();
-//      assertNotEquals(0, otherThreadCount);
-//    }
-//
-//    @Test
-//    public void streamMutation() {
-//      var seq = NumericVec.doubles();
-//      seq.add(32.);
-//      var stream = seq.stream();
-//      seq.add(64.);
-//      assertEquals(List.of(32.), stream.toList());
-//    }
-//
-//    @Test
-//    public void streamDontSplitIfNotEnoughElements() {
-//      var seq = NumericVec.ints();
-//      IntStream.range(0, 512).forEach(seq::add);
-//      assertNull(seq.stream().spliterator().trySplit());
-//    }
-//
-//    @Test
-//    public void streamSplitIfEnoughElements() {
-//      var seq = NumericVec.ints();
-//      IntStream.range(0, 2_048).forEach(seq::add);
-//      assertNotNull(seq.stream().spliterator().trySplit());
-//    }
-//
-//    @Test
-//    public void streamNotParallelByDefault() {
-//      var stream = NumericVec.longs(200L).stream();
-//      assertFalse(stream.isParallel());
-//    }
-//
-//    @Test
-//    public void streamCharacteristics() {
-//      var spliterator = NumericVec.longs().stream().spliterator();
-//      assertAll(
-//          () -> spliterator.hasCharacteristics(Spliterator.NONNULL),
-//          () -> spliterator.hasCharacteristics(Spliterator.ORDERED),
-//          () -> spliterator.hasCharacteristics(Spliterator.IMMUTABLE)
-//      );
-//    }
-//  }
+  @Nested
+  public class Q6 {
+
+    @Test
+    public void addAll() {
+      var seq = NumericVec.longs();
+      seq.add(44L);
+      seq.add(666L);
+      var seq2 = NumericVec.longs();
+      seq2.add(77L);
+      seq2.add(666L);
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(4, seq.size()),
+          () -> assertEquals(44L, seq.get(0)),
+          () -> assertEquals(666L, seq.get(1)),
+          () -> assertEquals(77L, seq.get(2)),
+          () -> assertEquals(666L, seq.get(3))
+      );
+    }
+
+    @Test
+    public void addAllInts() {
+      var seq = NumericVec.ints(44, 666);
+      var seq2 = NumericVec.ints(77, 666);
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(4, seq.size()),
+          () -> assertEquals(44, seq.get(0)),
+          () -> assertEquals(666, seq.get(1)),
+          () -> assertEquals(77, seq.get(2)),
+          () -> assertEquals(666, seq.get(3))
+      );
+    }
+
+    @Test
+    public void addAllLongs() {
+      var seq = NumericVec.longs(44, 666);
+      var seq2 = NumericVec.longs(77, 666);
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(4, seq.size()),
+          () -> assertEquals(44L, seq.get(0)),
+          () -> assertEquals(666L, seq.get(1)),
+          () -> assertEquals(77L, seq.get(2)),
+          () -> assertEquals(666L, seq.get(3))
+      );
+    }
+
+    @Test
+    public void addAllDoubles() {
+      var seq = NumericVec.doubles(44., 666.);
+      var seq2 = NumericVec.doubles(77., 666.);
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(4, seq.size()),
+          () -> assertEquals(44., seq.get(0)),
+          () -> assertEquals(666., seq.get(1)),
+          () -> assertEquals(77., seq.get(2)),
+          () -> assertEquals(666., seq.get(3))
+      );
+    }
+
+    @Test
+    public void addAllIntsEmpty() {
+      var seq = NumericVec.ints(32);
+      var seq2 = NumericVec.ints();
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(1, seq.size()),
+          () -> assertEquals(32, seq.get(0))
+      );
+    }
+
+    @Test
+    public void addAllLongsEmpty() {
+      var seq = NumericVec.longs(32L);
+      var seq2 = NumericVec.longs();
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(1, seq.size()),
+          () -> assertEquals(32L, seq.get(0))
+      );
+    }
+
+    @Test
+    public void addAllDoublesEmpty() {
+      var seq = NumericVec.doubles(32.);
+      var seq2 = NumericVec.doubles();
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(1, seq.size()),
+          () -> assertEquals(32., seq.get(0))
+      );
+    }
+
+    @Test
+    public void addAllIntsBig() {
+      var seq = NumericVec.ints();
+      IntStream.range(0, 1_000_000).forEach(seq::add);
+      var seq2 = NumericVec.ints();
+      IntStream.range(1_000_000, 2_000_000).forEach(seq2::add);
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(2_000_000, seq.size()),
+          () -> IntStream.range(0, 2_000_000).forEach(i -> assertEquals(i, seq.get(i)))
+      );
+    }
+
+    @Test
+    public void addAllLongsBig() {
+      var seq = NumericVec.longs();
+      LongStream.range(0, 1_000_000).forEach(seq::add);
+      var seq2 = NumericVec.longs();
+      LongStream.range(1_000_000, 2_000_000).forEach(seq2::add);
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(2_000_000, seq.size()),
+          () -> IntStream.range(0, 2_000_000).forEach(i -> assertEquals((long) i, seq.get(i)))
+      );
+    }
+
+    @Test
+    public void addAllDoublesBig() {
+      var seq = NumericVec.doubles();
+      IntStream.range(0, 1_000_000).mapToDouble(i -> i).forEach(seq::add);
+      var seq2 = NumericVec.doubles();
+      IntStream.range(1_000_000, 2_000_000).mapToDouble(i -> i).forEach(seq2::add);
+      seq.addAll(seq2);
+      assertAll(
+          () -> assertEquals(2_000_000, seq.size()),
+          () -> IntStream.range(0, 2_000_000).forEach(i -> assertEquals((double) i, seq.get(i)))
+      );
+    }
+    
+
+    @Test
+    public void addAllPrecondition() {
+      var seq = NumericVec.longs(65L, 67L);
+      assertThrows(NullPointerException.class, () -> seq.addAll(null));
+    }
+  }
+
+
+  @Nested
+  public class Q7 {
+
+    @Test
+    public void map() {
+      var seq = NumericVec.longs();
+      seq.add(45L);
+      seq.add(37L);
+      NumericVec<Double> seq2 = seq.map(l -> (double) l, NumericVec::doubles);
+      assertAll(
+          () -> assertEquals(2, seq2.size()),
+          () -> assertEquals(45., seq2.get(0)),
+          () -> assertEquals(37., seq2.get(1))
+      );
+    }
+
+    @Test
+    public void mapOfInts() {
+      var seq = NumericVec.ints(45, 37);
+      NumericVec<Integer> seq2 = seq.map(i -> 2 * i, NumericVec::ints);
+      assertAll(
+          () -> assertEquals(2, seq2.size()),
+          () -> assertEquals(90, seq2.get(0)),
+          () -> assertEquals(74, seq2.get(1)),
+          () -> assertNotSame(seq, seq2)
+      );
+    }
+
+    @Test
+    public void mapOfLongs() {
+      var seq = NumericVec.longs(45L, 37L);
+      NumericVec<Long> seq2 = seq.map(l -> 2L * l, NumericVec::longs);
+      assertAll(
+          () -> assertEquals(2, seq2.size()),
+          () -> assertEquals(90L, seq2.get(0)),
+          () -> assertEquals(74L, seq2.get(1)),
+          () -> assertNotSame(seq, seq2)
+      );
+    }
+
+    @Test
+    public void mapOfDoubles() {
+      var seq = NumericVec.doubles(45., 37.);
+      NumericVec<Double> seq2 = seq.map(d -> 2.0 * d, NumericVec::doubles);
+      assertAll(
+          () -> assertEquals(2, seq2.size()),
+          () -> assertEquals(90., seq2.get(0)),
+          () -> assertEquals(74., seq2.get(1)),
+          () -> assertNotSame(seq, seq2)
+      );
+    }
+
+    @Test
+    public void mapOfIntsToOtherPrimitives() {
+      var seq = NumericVec.ints(45, 37);
+      var seq2 = seq.map(i -> (long) i, NumericVec::longs);
+      var seq3 = seq.map(i -> (double) i, NumericVec::doubles);
+      assertAll(
+          () -> assertEquals(2, seq2.size()),
+          () -> assertEquals(45L, seq2.get(0)),
+          () -> assertEquals(37L, seq2.get(1)),
+          () -> assertEquals(2, seq3.size()),
+          () -> assertEquals(45., seq3.get(0)),
+          () -> assertEquals(37., seq3.get(1))
+      );
+    }
+
+    @Test
+    public void mapOfLongsToOtherPrimitives() {
+      var seq = NumericVec.longs(45L, 37L);
+      var seq2 = seq.map(l -> (int) (long) l, NumericVec::ints);
+      var seq3 = seq.map(l -> (double) l, NumericVec::doubles);
+      assertAll(
+          () -> assertEquals(2, seq2.size()),
+          () -> assertEquals(45, seq2.get(0)),
+          () -> assertEquals(37, seq2.get(1)),
+          () -> assertEquals(2, seq3.size()),
+          () -> assertEquals(45., seq3.get(0)),
+          () -> assertEquals(37., seq3.get(1))
+      );
+    }
+
+    @Test
+    public void mapOfDoublesToOtherPrimitives() {
+      var seq = NumericVec.doubles(45., 37.);
+      var seq2 = seq.map(d -> (int) (double) d, NumericVec::ints);
+      var seq3 = seq.map(d -> (long) (double) d, NumericVec::longs);
+      assertAll(
+          () -> assertEquals(2, seq2.size()),
+          () -> assertEquals(45, seq2.get(0)),
+          () -> assertEquals(37, seq2.get(1)),
+          () -> assertEquals(2, seq3.size()),
+          () -> assertEquals(45L, seq3.get(0)),
+          () -> assertEquals(37L, seq3.get(1))
+      );
+    }
+
+    @Test
+    public void mapNotTheSame() {
+      var seq = NumericVec.longs(42L);
+      var seq2 = seq.map((Object o) -> 42, NumericVec::ints);
+      assertNotSame(seq, seq2);
+    }
+
+    @Test
+    public void mapPreconditions() {
+      var seq = NumericVec.longs();
+      assertAll(
+          () -> assertThrows(NullPointerException.class, () -> seq.map(null, NumericVec::ints)),
+          () -> assertThrows(NullPointerException.class, () -> seq.map(i -> i, null))
+      );
+    }
+  }
+
+
+  @Nested
+  public class Q8 {
+
+    @Test
+    public void toNumericSeq() {
+      var seq = IntStream.range(0, 10).boxed().collect(NumericVec.toNumericVec(NumericVec::ints));
+      assertAll(
+          () -> assertEquals(10, seq.size()),
+          () -> IntStream.range(0, 10).forEach(i -> assertEquals(i, seq.get(i)))
+      );
+    }
+
+    @Test
+    public void toNumericSeqMutable() {
+      var seq = Stream.of(12L, 45L).collect(NumericVec.toNumericVec(NumericVec::longs));
+      seq.add(99L);
+      assertAll(
+          () -> assertEquals(3, seq.size()),
+          () -> assertEquals(12L, seq.get(0)),
+          () -> assertEquals(45L, seq.get(1)),
+          () -> assertEquals(99L, seq.get(2))
+      );
+    }
+
+    @Test
+    public void toNumericSeqParallelInts() {
+      var seq = IntStream.range(0, 1_000_000).parallel()
+          .boxed()
+          .collect(NumericVec.toNumericVec(NumericVec::ints));
+      assertAll(
+          () -> assertEquals(1_000_000, seq.size()),
+          () -> IntStream.range(0, 1_000_000).forEach(i -> assertEquals(i, seq.get(i)))
+      );
+    }
+
+    @Test
+    public void toNumericSeqParallelLongs() {
+      var seq = LongStream.range(0, 1_000_000).parallel()
+          .boxed()
+          .collect(NumericVec.toNumericVec(NumericVec::longs));
+      assertAll(
+          () -> assertEquals(1_000_000, seq.size()),
+          () -> IntStream.range(0, 1_000_000).forEach(i -> assertEquals((long) i, seq.get(i)))
+      );
+    }
+
+    @Test
+    public void toNumericSeqParallelDoubles() {
+      var seq = IntStream.range(0, 1_000_000).parallel()
+          .mapToObj(i -> (double) i)
+          .collect(NumericVec.toNumericVec(NumericVec::doubles));
+      assertAll(
+          () -> assertEquals(1_000_000, seq.size()),
+          () -> IntStream.range(0, 1_000_000).forEach(i -> assertEquals((double) i, seq.get(i)))
+      );
+    }
+
+    @Test
+    public void toNumericSeqPreconditions() {
+      assertThrows(NullPointerException.class, () -> NumericVec.toNumericVec(null));
+    }
+
+    @Test
+    public void toNumericVersusNull() {
+      assertAll(
+          () -> assertThrows(NullPointerException.class, () -> Stream.of(12, null).collect(NumericVec.toNumericVec(NumericVec::ints))),
+          () -> assertThrows(NullPointerException.class, () -> Stream.of(12L, null).collect(NumericVec.toNumericVec(NumericVec::longs))),
+          () -> assertThrows(NullPointerException.class, () -> Stream.of(12., null).collect(NumericVec.toNumericVec(NumericVec::doubles)))
+      );
+    }
+  }
+
+
+  @Nested
+  public class Q9 {
+
+    @Test
+    public void stream() {
+      var seq = NumericVec.longs();
+      seq.add(12L);
+      seq.add(1L);
+      assertEquals(List.of(12L, 1L), seq.stream().toList());
+    }
+
+    @Test
+    public void streamCount() {
+      var seq = NumericVec.ints(2, 3, 4);
+      assertEquals(3, seq.stream().map(__ -> fail()).count());
+    }
+
+    @Test
+    public void streamParallel() {
+      var seq = IntStream.range(0, 1_000_000).boxed().collect(NumericVec.toNumericVec(NumericVec::ints));
+      var thread = Thread.currentThread();
+      var otherThreadCount = seq.stream().parallel().mapToInt(__ -> thread != Thread.currentThread()? 1: 0).sum();
+      assertNotEquals(0, otherThreadCount);
+    }
+
+    @Test
+    public void streamMutation() {
+      var seq = NumericVec.doubles();
+      seq.add(32.);
+      var stream = seq.stream();
+      seq.add(64.);
+      assertEquals(List.of(32.), stream.toList());
+    }
+
+    @Test
+    public void streamDontSplitIfNotEnoughElements() {
+      var seq = NumericVec.ints();
+      IntStream.range(0, 512).forEach(seq::add);
+      assertNull(seq.stream().spliterator().trySplit());
+    }
+
+    @Test
+    public void streamSplitIfEnoughElements() {
+      var seq = NumericVec.ints();
+      IntStream.range(0, 2_048).forEach(seq::add);
+      assertNotNull(seq.stream().spliterator().trySplit());
+    }
+
+    @Test
+    public void streamNotParallelByDefault() {
+      var stream = NumericVec.longs(200L).stream();
+      assertFalse(stream.isParallel());
+    }
+
+    @Test
+    public void streamCharacteristics() {
+      var spliterator = NumericVec.longs().stream().spliterator();
+      assertAll(
+          () -> spliterator.hasCharacteristics(Spliterator.NONNULL),
+          () -> spliterator.hasCharacteristics(Spliterator.ORDERED),
+          () -> spliterator.hasCharacteristics(Spliterator.IMMUTABLE)
+      );
+    }
+  }
 }
